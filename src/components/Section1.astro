@@ -1,0 +1,37 @@
+---
+import Linkelin from '../icons/Linkelin.astro';
+
+interface Props {
+	text:String;
+}
+const { text } = Astro.props;
+---
+    
+    <section id="section1" class="section1" aria-labelledby="hero-heading">
+			<!-- <video  class="video" autoplay loop muted playsinline>
+			<source src="../../videos/videoRed.mp4" type="video/mp4">
+			</video> -->
+        <!-- 			<div class="img"><img  class="video" src="../../public/images/verde3.jpg"></div>
+             -->			
+		
+			<div class="tit">
+				<h3 id="subtitle-heading">FULLSTACK WEB DEVELOPER{text}</h3>
+				<h1 id="hero-heading" class="titulo">VICTOR DOMINGUEZ</h1>
+				<div>
+					<a href="https://www.linkedin.com/in/víctor-domínguez-ruiz-820870222" 
+						target="_blank" 
+						rel="noopener noreferrer" 
+						aria-label="LinkedIn profile">
+						<Linkelin/>
+					</a>
+				</div>
+				<!-- <p>nwrfoinqwer fqjier fkewjr gklew rgkljwe gkewj rgkewj rgkjew grkewj grkewj rgklewj rgklewjgr kewljrg kewjrg kewjrg kewjrg kewjrg kwejrg kewjrg wklejrg grkj </p> -->
+				
+			</div>
+            <div class="shadow" aria-hidden="true"></div>
+			<div class="difuminado" aria-hidden="true"></div>
+			
+			
+
+			
+		</section>
