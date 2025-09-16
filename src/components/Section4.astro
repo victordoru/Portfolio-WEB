@@ -1,3 +1,13 @@
+---
+// Cargar variables de entorno en el servidor y pasarlas al cliente
+const emailConfig = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID ,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID ,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY ,
+  contactEmail: import.meta.env.VITE_CONTACT_EMAIL 
+};
+---
+
 <section id="section4" class="section4" aria-labelledby="contact-title">
   <h1 id="contact-title" class="title-section2">CONTACT</h1>
   
@@ -18,7 +28,11 @@
     </a>
   </div>
 
-  <form id="contactForm" action="/api/contact" method="POST" class="contact-form">
+  <div class="separator">
+    <span class="separator-text">or send a message</span>
+  </div>
+
+  <form id="contactForm" class="contact-form">
     <div class="form-row">
       <div class="form-group">
         <label for="nombre" class="form-label">Name</label>
@@ -71,45 +85,163 @@
   </form>
 </section>
 
-<script>
-  // Este script será procesado por el navegador
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm') as HTMLFormElement;
-    const formMessage = document.getElementById('form-message');
+<script define:vars={{ emailConfig }}>
+  // Load EmailJS from CDN instead of import
+  const loadEmailJS = async () => {
+    if (window.emailjs) return window.emailjs;
     
-    if (form && formMessage) {
+    // Load EmailJS from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    document.head.appendChild(script);
+    
+    return new Promise((resolve) => {
+      script.onload = () => resolve(window.emailjs);
+    });
+  };
+
+  // Configuración desde el servidor (variables de entorno procesadas)
+  const CONFIG = {
+    serviceId: emailConfig.serviceId,
+    templateId: emailConfig.templateId,
+    publicKey: emailConfig.publicKey,
+    contactEmail: emailConfig.contactEmail
+  };
+
+  // Debug: Log configuration
+  console.log('EmailJS Config:', {
+    serviceId: CONFIG.serviceId,
+    templateId: CONFIG.templateId,
+    publicKey: CONFIG.publicKey ? 'SET' : 'MISSING',
+    contactEmail: CONFIG.contactEmail
+  });
+
+  // Initialize all functionality when DOM is ready
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Load EmailJS first
+    const emailjs = await loadEmailJS();
+    // Parallax scrolling effect for the hero section with optimization
+    const contenedor = document.querySelector('.section1');
+    const scrollFactor = 0.1;
+    let ticking = false;
+    let lastScrollY = window.scrollY;
+
+    if (contenedor) {
+      // Set initial background size
+      contenedor.style.backgroundSize = 'auto 180%';
+      
+      // Optimized scroll handler using requestAnimationFrame
+      window.addEventListener('scroll', () => {
+        lastScrollY = window.scrollY;
+        
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            // Only update if we've scrolled enough to make a visible difference
+            const backgroundWidth = 180 + lastScrollY * scrollFactor;
+            const backgroundSize = 'auto ' + backgroundWidth + '%';
+            contenedor.style.backgroundSize = backgroundSize;
+            ticking = false;
+          });
+          
+          ticking = true;
+        }
+      });
+    }
+
+    // Project grid click handling
+    const container = document.querySelector('.container-grid');
+    if (container) {
+      const articles = container.querySelectorAll('article');
+
+      articles.forEach((article, index) => {
+        article.addEventListener('click', function() {
+          let url;
+          switch (index + 1) {
+            case 1:
+              url = 'https://citmalumnes.upc.es/~victordr/videos/hoopling.mp4';
+              break;
+            case 2:
+              url = 'https://victordoru.itch.io/unealia';
+              break;
+            // Add other cases as needed
+            default:
+              return;
+          }
+          if (url) {
+            window.open(url, '_blank');
+          }
+        });
+      });
+    }
+
+    // EmailJS Form Handling
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('form-message');
+    const submitButton = document.querySelector('.submit-button');
+    
+    if (form && formMessage && submitButton) {
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         
         try {
           const formData = new FormData(form);
           
-          // Mostrar estado de carga
-          formMessage.textContent = 'Sending message...';
+          // Deshabilitar botón y mostrar estado de carga
+          submitButton.disabled = true;
+          submitButton.textContent = 'SENDING...';
+          formMessage.textContent = 'Sending your message...';
           formMessage.className = 'form-message info';
           
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            body: formData
-          });
+          // Preparar parámetros para EmailJS
+          const templateParams = {
+            from_name: formData.get('nombre'),
+            from_email: formData.get('email'),
+            subject: formData.get('asunto'),
+            message: formData.get('mensaje'),
+            to_name: 'Víctor Doru',
+            to_email: CONFIG.contactEmail,
+          };
+
+          console.log('Sending email with params:', templateParams);
+          console.log('Service ID:', CONFIG.serviceId);
+          console.log('Template ID:', CONFIG.templateId);
+          console.log('Public Key:', CONFIG.publicKey);
           
-          const result = await response.json();
+          // Enviar email usando EmailJS
+          const result = await emailjs.send(
+            CONFIG.serviceId, 
+            CONFIG.templateId, 
+            templateParams, 
+            CONFIG.publicKey
+          );
           
-          if (response.ok) {
-            // Éxito
-            formMessage.textContent = 'Message sent successfully!';
-            formMessage.className = 'form-message success';
-            form.reset();
-          } else {
-            // Error del servidor
-            formMessage.textContent = result.message || 'Error sending message. Please try again.';
-            formMessage.className = 'form-message error';
-          }
+          console.log('EmailJS Success:', result);
+          
+          // Éxito
+          formMessage.textContent = 'Message sent! I will get back to soon!';
+          formMessage.className = 'form-message success';
+          form.reset();
+          
+          // Hacer que el mensaje desaparezca después de 5 segundos
+          setTimeout(() => {
+            formMessage.style.opacity = '0';
+            formMessage.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+              formMessage.style.display = 'none';
+              formMessage.style.opacity = '1'; // Resetear para próximos usos
+            }, 500);
+          }, 5000);
+          
         } catch (error) {
-          // Error de red o JavaScript
-          formMessage.textContent = 'Connection error. Please try again later.';
+          console.error('EmailJS Error:', error);
+          
+          // Error
+          formMessage.textContent = 'Oops! Something went wrong. Please try again or contact me directly at victordoru96@gmail.com';
           formMessage.className = 'form-message error';
-          console.error('Form submission error:', error);
+        } finally {
+          // Rehabilitar botón
+          submitButton.disabled = false;
+          submitButton.textContent = 'SEND MESSAGE';
         }
       });
     }
@@ -161,6 +293,36 @@
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(8, 203, 213, 0.3);
+}
+
+/* Separador elegante */
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.separator-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 8px 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Formulario mejorado */
@@ -219,6 +381,13 @@
 
 .submit-button:active {
   transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Mensajes del formulario */
