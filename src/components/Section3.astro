@@ -38,7 +38,7 @@ import Express from '../icons/Express.astro';
 						<article role="listitem" tabindex="0" aria-label="Project: MOVIE SEARCHER - React App" data-project="movie-searcher">
 							<div>
 								<h4>MOVIE SEARCHER</h4>
-								<p>A web platform that leverages an API to showcase movies along with their ratings, effectively managing and sorting movie data by actors while providing comprehensive film details. REACT, AJAX, GESTION BBD
+								<p>A web platform leveraging an API to showcase movies and ratings, with data management by actors and detailed film information. Built with React, AJAX, and simple database handling, as one of my first programming class projects.
 								</p>
 							</div>
 							<div class="card-icons" aria-label="Technologies used: React"><React/></div>
@@ -64,26 +64,27 @@ import Express from '../icons/Express.astro';
 						<article role="listitem" tabindex="0" aria-label="Project: VIDEO SOHO - Promotional Video" data-project="video-soho">
 							<div>
 								<h4>VIDEO SOHO</h4>
-								<p>A promotional video for Teatro del Soho, from production to post-production.</p>
+								<p>A promotional video for Teatro del Soho, from production to post-production. My work included on-site filming and camera operation, as well as editing and motion graphics in After Effects. Some parts of the production were provided, while others were fully developed by me.</p>
 							</div>
 							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
 						</article>
+            <article role="listitem" tabindex="0" aria-label="Project: NIKE VIDEO - Advertisement" data-project="nike-video">
+              <div>
+                <h4>NIKE VIDEO</h4>
+                <p>A Nike advertisement featuring dynamic animations created in After Effects.</p>
+              </div>
+              <div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
+            </article>
 						<article role="listitem" tabindex="0" aria-label="Project: IVOOX - Advertisement" data-project="ivoox">
 							<div>
 								<h4>IVOOX</h4>
-								<p>Production and post-production of a compelling advertisement for iVoox, the podcast platform</p>
+								<p>Production and post-production of an iVoox advertisement, including camera work, editing, and motion graphics in After Effects.
+                </p>
 							</div>
 							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
 						</article>
-						<!-- COMMENTED PROJECT: NIKE VIDEO - Can be restored later
-						<article role="listitem" tabindex="0" aria-label="Project: NIKE VIDEO - Advertisement" data-project="nike-video">
-							<div>
-								<h4>NIKE VIDEO</h4>
-								<p>A Nike advertisement featuring dynamic animations created in After Effects.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
-						</article>
-						-->
+						 
+						
 						<!-- COMMENTED PROJECT: CASINO ROYALE - Can be restored later
 						<article role="listitem" tabindex="0" aria-label="Project: CASINO ROYALE - Animation" data-project="casino-royale">
 							<div>
@@ -93,13 +94,13 @@ import Express from '../icons/Express.astro';
 							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
 						</article>
 						-->
-						<article role="listitem" tabindex="0" aria-label="Project: INSIDE THE MIND - 3D Animation" data-project="inside-the-mind">
+						<!-- <article role="listitem" tabindex="0" aria-label="Project: INSIDE THE MIND - 3D Animation" data-project="inside-the-mind">
 							<div>
 								<h4>INSIDE THE MIND</h4>
 								<p>A brief 3D animation showcasing 3D modeling and animation skills.</p>
 							</div>
 							<div class="card-icons" aria-label="Technologies used: 3D Max, Premier"><Dmax/><Premier/></div>
-						</article>
+						</article> -->
 						<!-- COMMENTED PROJECT: ENERGY - Can be restored later
 						<article role="listitem" tabindex="0" aria-label="Project: ENERGY - Graphic Design" data-project="energy">
 							<div>
@@ -109,13 +110,13 @@ import Express from '../icons/Express.astro';
 							<div class="card-icons" aria-label="Technologies used: Photoshop"><Photoshop/></div>
 						</article>
 						-->
-						<article role="listitem" tabindex="0" aria-label="Project: NIKE LANDING - Graphic Design" data-project="nike-landing">
+						<!-- <article role="listitem" tabindex="0" aria-label="Project: NIKE LANDING - Graphic Design" data-project="nike-landing">
 							<div>
 								<h4>NIKE LANDING</h4>
 								<p>Poster for a landing page featuring sneaker sales, with a focus on design aesthetics and visual appeal.</p>
 							</div>
 							<div class="card-icons" aria-label="Technologies used: Photoshop"><Photoshop/></div>
-						</article>
+						</article> -->
 				</div>
 
 			</section>
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTitle = document.getElementById('modal-title') as HTMLElement | null;
   const modalContentContainer = document.getElementById('modal-content-container') as HTMLElement | null;
   const closeBtn = document.querySelector('.modal-close') as HTMLElement | null;
-  const projectCards = document.querySelectorAll('[data-project]') as NodeListOf<HTMLElement>;
+  const projectCards = document.querySelectorAll('#section3 [data-project]') as NodeListOf<HTMLElement>;
 
   if (!modal || !modalTitle || !modalContentContainer || !closeBtn) {
     console.error('Modal elements not found');
