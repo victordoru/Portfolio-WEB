@@ -6,18 +6,21 @@ import Section1 from '../components/Section1.astro';
 import Section3 from '../components/Section3.astro';
 import Section2 from '../components/Section2.astro';
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { translations, type Lang } from '../i18n/translations';
+
+const lang: Lang = 'en';
+const copy = translations[lang];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={copy.site.title} description={copy.site.description} lang={lang} />
   </head>
   <body>
-    <Section1 text=""></Section1>
-    <Section2></Section2>
-    <Section3></Section3>
-    <Section4/>
+    <Section1 lang={lang} />
+    <Section2 lang={lang} />
+    <Section3 lang={lang} />
+    <Section4 lang={lang} />
   </body>
 </html>

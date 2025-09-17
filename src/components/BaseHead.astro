@@ -2,16 +2,18 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import type { Lang } from '../i18n/translations';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	lang?: Lang;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
+const { title, description, image = '/placeholder-social.jpg', lang = 'en' } = Astro.props as Props;
+const languageMeta = lang === 'es' ? 'Spanish' : 'English';
 ---
 
 <!-- Global Metadata -->
@@ -47,7 +49,7 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 
 <!-- Additional Meta Tags for SEO -->
 <meta name="robots" content="index, follow" />
-<meta name="language" content="English" />
+<meta name="language" content={languageMeta} />
 <meta name="revisit-after" content="7 days" />
 
 <!-- Preconnect to resources for performance -->
@@ -67,4 +69,3 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
     ]
   }
 </script>
-

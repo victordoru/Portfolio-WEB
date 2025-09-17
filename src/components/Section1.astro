@@ -1,82 +1,136 @@
 ---
 import Linkelin from '../icons/Linkelin.astro';
- 
-interface Props {
-	text:String;
-}
-const { text } = Astro.props;
----
-    
-	<section id="section1" class="section1" aria-labelledby="hero-heading">
-			<!-- <video  class="video" autoplay loop muted playsinline>
-			<source src="../../videos/videoRed.mp4" type="video/mp4">
-			</video> -->
-        <!-- 			<div class="img"><img  class="video" src="../../public/images/verde3.jpg"></div>
-             -->			
-		
-			<div class="top-contact">
-				<a id="contact-btn" href="#section4" aria-label="Ir a la sección de contacto">
-					Get in touch
-				</a>
-				<div class="top-contact-links" aria-label="Contact options">
-					<a
-						class="top-contact-link whatsapp"
-						href="https://wa.me/34672015046"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Abrir WhatsApp"
-					>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-							<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488" />
-						</svg>
-					</a>
-					<a
-						class="top-contact-link phone"
-						href="tel:+34672015046"
-						aria-label="Llamar por teléfono"
-					>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-							<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-						</svg>
-					</a>
-				</div>
-			</div>
-			<div class="tit">
-				<h3 id="subtitle-heading">FULLSTACK WEB DEVELOPER{text}</h3>
-				<h1 id="hero-heading" class="titulo">VICTOR DOMINGUEZ</h1>
-				<div class="social-buttons">
-					<a id="download-cv" href="/images/CV_Victor_Dominguez_en.pdf" 
-						download="Victor_Dominguez_CV.pdf"
-						aria-label="Download CV">
-						Download CV
-					</a>
-					<a class="linkedin-link" style="height: 42px;" href="https://www.linkedin.com/in/víctor-domínguez-ruiz-820870222" 
-						target="_blank" 
-						rel="noopener noreferrer" 
-						aria-label="LinkedIn profile">
-						<Linkelin/>
-					</a>
-				</div>
-				<!-- <p>nwrfoinqwer fqjier fkewjr gklew rgkljwe gkewj rgkewj rgkjew grkewj grkewj rgklewj rgklewjgr kewljrg kewjrg kewjrg kewjrg kewjrg kwejrg kewjrg wklejrg grkj </p> -->
-				
-			</div>
-            <div class="shadow" aria-hidden="true"></div>
-			<div class="difuminado" aria-hidden="true"></div>
-			<a class="scroll-down" href="#section2" aria-label="Scroll to next section">
-				<span></span>
-			</a>
-	</section>
+import { translations, type Lang } from '../i18n/translations';
 
-		<style>
-			.top-contact {
-				position: absolute;
-				top: 40px;
-				right: 40px;
-				display: flex;
-				align-items: center;
-				gap: 14px;
-				z-index: 10;
-			}
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].section1;
+const site = translations[lang].site;
+---
+
+<section id="section1" class="section1" aria-labelledby="hero-heading">
+  <!-- <video  class="video" autoplay loop muted playsinline>
+  <source src="../../videos/videoRed.mp4" type="video/mp4">
+  </video> -->
+  <!-- 			<div class="img"><img  class="video" src="../../public/images/verde3.jpg"></div>
+           -->			
+
+  <div class="language-switch" aria-label={`Language ${site.languageLabel}`}>
+    <span>{site.languageLabel}</span>
+    <a href={site.switchHref} aria-label={site.switchAria}>{site.switchLabel}</a>
+  </div>
+
+  <div class="top-contact">
+    <a id="contact-btn" href="#section4" aria-label={t.contactAria}>
+      {t.contactButton}
+    </a>
+    <div class="top-contact-links" aria-label={t.contactOptionsAria}>
+      <a
+        class="top-contact-link whatsapp"
+        href="https://wa.me/34672015046"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t.whatsappAria}
+        title={t.whatsappTitle}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488" />
+        </svg>
+      </a>
+      <a
+        class="top-contact-link phone"
+        href="tel:+34672015046"
+        aria-label={t.phoneAria}
+        title={t.phoneTitle}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="tit">
+    <h3 id="subtitle-heading">{t.subtitle}</h3>
+    <h1 id="hero-heading" class="titulo">{t.name}</h1>
+    <div class="social-buttons">
+      <a
+        id="download-cv"
+        href="/images/CV_Victor_Dominguez_en.pdf"
+        download="Victor_Dominguez_CV.pdf"
+        aria-label={t.downloadCvAria}
+      >
+        {t.downloadCv}
+      </a>
+      <a
+	  style="height: 42px;"
+        class="linkedin-link"
+        href="https://www.linkedin.com/in/víctor-domínguez-ruiz-820870222"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t.linkedinAria}
+      >
+        <Linkelin />
+      </a>
+    </div>
+  </div>
+  <div class="shadow" aria-hidden="true"></div>
+  <div class="difuminado" aria-hidden="true"></div>
+  <a class="scroll-down" href="#section2" aria-label={t.scrollAria}>
+    <span title={t.scrollLabel}></span>
+  </a>
+</section>
+
+<style>
+		.language-switch {
+			position: absolute;
+			top: 40px;
+			left: 40px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 16px;
+			border-radius: 5px;
+			
+			color: #ffffff;
+			font-size: 0.9rem;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			z-index: 10;
+			transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+		}
+		.language-switch:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(8, 203, 213, 0.2);
+			background: linear-gradient(135deg, rgba(17, 171, 179, 0.25) 0%, rgba(8, 203, 213, 0.35) 100%);
+		}
+		.language-switch span {
+			opacity: 0.8;
+			font-size: 0.85rem;
+		}
+		.language-switch a {
+			color: #11abb3;
+			text-decoration: none;
+			font-weight: 700;
+			font-size: 0.95rem;
+			transition: color 0.3s ease;
+		}
+		.language-switch a:hover {
+			color: #7ff3ff;
+		}
+
+		.top-contact {
+			position: absolute;
+			top: 40px;
+			right: 40px;
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			z-index: 10;
+		}
 			#contact-btn {
 				position: relative;
 				display: inline-flex;

@@ -13,110 +13,60 @@ import Cc from '../icons/Cc.astro';
 import Mongoo from '../icons/Mongoo.astro';
 import Nodee from '../icons/Nodee.astro';
 import Express from '../icons/Express.astro';
+import { translations, type Lang } from '../i18n/translations';
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].section3;
+
+const iconComponents = {
+  React,
+  Photoshop,
+  Premier,
+  Dmax,
+  Aftere,
+  Spoti,
+  HTM5,
+  Javasci,
+  Cs3,
+  Unity,
+  Cc,
+  Mongoo,
+  Nodee,
+  Express
+} as const;
+
+type IconKey = keyof typeof iconComponents;
+const modalData = t.modalProjects;
+const modalStrings = t.modal;
 ---        
         <section id="section3" class="section3" aria-labelledby="projects-title">
-				<h1 id="projects-title" class="title-section2">OTHER PROJECTS</h1>
+				<h1 id="projects-title" class="title-section2">{t.title}</h1>
 				<div class="container-grid" role="list">
-					<article role="listitem" tabindex="0" aria-label="Project: Málaga Cathedral AR - Three.js WebXR" data-project="malaga-cathedral">
-						<div>
-						<h4>MÁLAGA CATHEDRAL REIMAGINED IN AR</h4>
-						<p>As my Final Degree Project, I developed an Augmented Reality web application that digitally reconstructed the missing tower of Málaga Cathedral, combining 3D modeling, web programming, and AR integration using Three.js and WebXR technologies.
-						</p>
-					</div>
-					<div class="card-icons" aria-label="Technologies used: Three.js, WebXR, WebGL"> <HTM5/><Javasci/><Cs3/></div>
-					
-				</article>
-				    <article role="listitem" tabindex="0" aria-label="Project: UNEALIA - Unity Game" data-project="unealia">
+					{t.cards.map((card) => (
+						<article
+              role="listitem"
+              tabindex="0"
+              aria-label={card.ariaLabel}
+              data-project={card.key}
+            >
 							<div>
-								<h4>UNEALIA</h4>
-								<p>A multiplayer Unity game developed with C#, promoting social interaction and enjoyment among players. Unity - C# - 3D modeling
-								</p>
-							</div>
-						<div class="card-icons" aria-label="Technologies used: Unity, C#"><Unity/> <Cc/></div>
-						</article>
-						<article role="listitem" tabindex="0" aria-label="Project: MOVIE SEARCHER - React App" data-project="movie-searcher">
-							<div>
-								<h4>MOVIE SEARCHER</h4>
-								<p>A web platform leveraging an API to showcase movies and ratings, with data management by actors and detailed film information. Built with React, AJAX, and simple database handling, as one of my first programming class projects.
-								</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: React"><React/></div>
-						</article>
-						<!-- COMMENTED PROJECT: SHIFY - Can be restored later
-						<article role="listitem" tabindex="0" aria-label="Project: SHIFY - Spotify App" data-project="shify">
-							<div>
-								<h4>SHIFY</h4>
-								<p>A React Native app, powered by the Spotify API, enabling collaborative music playlist creation for group events. Users can add and manage songs in real-time, making it ideal for parties and meetings.</p>				
-							</div>
-							<div class="card-icons" aria-label="Technologies used: Spotify API"><Spoti/></div>
-						</article>
-						-->
-						<!-- COMMENTED PROJECT: SCAPEROOM - Can be restored later
-						<article role="listitem" tabindex="0" aria-label="Project: SCAPEROOM - Web Game" data-project="scaperoom">
-							<div>
-								<h4>SCAPEROOM</h4>
-								<p>A web-based escape room game built with JavaScript.interactive puzzles, challenges, and immersive experiences to solve.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: HTML5, JavaScript, CSS3"><HTM5/><Javasci/><Cs3/></div>
-						</article>
-						-->
-						<article role="listitem" tabindex="0" aria-label="Project: VIDEO SOHO - Promotional Video" data-project="video-soho">
-							<div>
-								<h4>VIDEO SOHO</h4>
-								<p>Promotional video for Teatro del Soho, involving filming, editing, and motion graphics in After Effects. Some parts were provided, others developed by me.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
-						</article>
-            <article role="listitem" tabindex="0" aria-label="Project: NIKE VIDEO - Advertisement" data-project="nike-video">
-              <div>
-                <h4>NIKE VIDEO</h4>
-                <p>A Nike advertisement featuring dynamic animations created in After Effects.</p>
-              </div>
-              <div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
-            </article>
-						<article role="listitem" tabindex="0" aria-label="Project: IVOOX - Advertisement" data-project="ivoox">
-							<div>
-								<h4>IVOOX</h4>
-								<p>Production and post-production of an iVoox advertisement, including camera work, editing, and motion graphics in After Effects.
-                </p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
-						</article>
-						 
+							<h4>{card.title}</h4>
+							<p>{card.description}
+							</p>
+						</div>
+						<div class="card-icons" aria-label={card.ariaTech}>
+              {card.icons.map((icon) => {
+                const IconComponent = iconComponents[icon as IconKey];
+                return IconComponent ? <IconComponent /> : null;
+              })}
+            </div>
 						
-						<!-- COMMENTED PROJECT: CASINO ROYALE - Can be restored later
-						<article role="listitem" tabindex="0" aria-label="Project: CASINO ROYALE - Animation" data-project="casino-royale">
-							<div>
-								<h4>CASINO ROYALE</h4>
-								<p>Production and post-production of an animation practice video in After Effects.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: After Effects, Premier"><Aftere/><Premier/></div>
-						</article>
-						-->
-						<!-- <article role="listitem" tabindex="0" aria-label="Project: INSIDE THE MIND - 3D Animation" data-project="inside-the-mind">
-							<div>
-								<h4>INSIDE THE MIND</h4>
-								<p>A brief 3D animation showcasing 3D modeling and animation skills.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: 3D Max, Premier"><Dmax/><Premier/></div>
-						</article> -->
-						<!-- COMMENTED PROJECT: ENERGY - Can be restored later
-						<article role="listitem" tabindex="0" aria-label="Project: ENERGY - Graphic Design" data-project="energy">
-							<div>
-								<h4>ENERGY</h4>
-								<p>A graphic design project for an energy drink brand, encompassing branding and packaging.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: Photoshop"><Photoshop/></div>
-						</article>
-						-->
-						<!-- <article role="listitem" tabindex="0" aria-label="Project: NIKE LANDING - Graphic Design" data-project="nike-landing">
-							<div>
-								<h4>NIKE LANDING</h4>
-								<p>Poster for a landing page featuring sneaker sales, with a focus on design aesthetics and visual appeal.</p>
-							</div>
-							<div class="card-icons" aria-label="Technologies used: Photoshop"><Photoshop/></div>
-						</article> -->
+				</article>
+					))}
 				</div>
 
 			</section>
@@ -134,110 +84,25 @@ import Express from '../icons/Express.astro';
   </div>
 </div>
 
-<script>
+<script define:vars={{ modalData, modalStrings }}>
 document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('project-modal') as HTMLElement | null;
-  const modalTitle = document.getElementById('modal-title') as HTMLElement | null;
-  const modalContentContainer = document.getElementById('modal-content-container') as HTMLElement | null;
-  const closeBtn = document.querySelector('.modal-close') as HTMLElement | null;
-  const projectCards = document.querySelectorAll('#section3 [data-project]') as NodeListOf<HTMLElement>;
+  const modal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalContentContainer = document.getElementById('modal-content-container');
+  const closeBtn = document.querySelector('.modal-close');
+  const projectCards = document.querySelectorAll('#section3 [data-project]');
 
   if (!modal || !modalTitle || !modalContentContainer || !closeBtn) {
     console.error('Modal elements not found');
     return;
   }
 
-  // Project data configuration
-  type ProjectData = {
-    type: 'video' | 'image' | 'link' | 'special' | 'video-youtube';
-    title: string;
-    description: string;
-    content?: string;
-    link?: string;
-    vimeoId?: string;
-    downloadLink?: string;
-    youtubeId?: string;
-  };
-
-  const projectData: Record<string, ProjectData> = {
-    'malaga-cathedral': {
-      type: 'video',
-      title: 'MÁLAGA CATHEDRAL REIMAGINED IN AR',
-      description: 'As my Final Degree Project, I developed an Augmented Reality (AR) web application that digitally reconstructed the missing tower of Málaga Cathedral, known as La Manquita. The project combined 3D modeling, web programming, and AR integration to allow users to visualize the cathedral as it was originally designed, both at real scale and on a 3D-printed model. Using technologies such as Three.js, WebGL, and WebXR, the solution runs directly in the browser, eliminating the need for native installations. The application explored different AR approaches, including hit testing, image recognition, and strategic positioning, to achieve accurate placement of the 3D model in real-world scenarios. It also implemented dynamic lighting environments based on the time of day and underwent user testing to refine usability. The result is an interactive tool that blends cultural heritage with immersive technology, offering visitors a new way to experience the cathedral.',
-      content: '/projects/composicion-TFG.mp4'
-    },
-    'unealia': {
-      type: 'special',
-      title: 'UNEALIA',
-      description: 'Unealia is a 2-4 players local-multiplayer party game. Compete to destroy friendships in the collections of minigames! Developed by 5 students from "Grado en Multimedia" (UPC). The team consists of two main programmers, Víctor Domínguez and Jorge Mateo Ortiz, two 3D modelers, Ignacio Solera and Pere Balasch, and one creative director, Enric Palà.',
-      vimeoId: '429552275',
-      downloadLink: 'https://victordoru.itch.io/unealia'
-    },
-    'movie-searcher': {
-      type: 'link',
-      title: 'MOVIE SEARCHER',
-      description: 'A web platform that leverages an API to showcase movies along with their ratings, effectively managing and sorting movie data by actors while providing comprehensive film details.',
-      link: 'https://teal-pavlova-3dd3ef.netlify.app/'
-    },
-    'shify': {
-      type: 'image',
-      title: 'SHIFY',
-      description: 'A React Native app, powered by the Spotify API, enabling collaborative music playlist creation for group events. Users can add and manage songs in real-time, making it ideal for parties and meetings.',
-      content: '/images/spotify.jpg'
-    },
-    'scaperoom': {
-      type: 'image',
-      title: 'SCAPEROOM',
-      description: 'A web-based escape room game built with JavaScript featuring interactive puzzles, challenges, and immersive experiences to solve.',
-      content: '/images/scaperoom.jpg'
-    },
-    'video-soho': {
-      type: 'video-youtube',
-      title: 'VIDEO SOHO',
-      description: 'A promotional video for Teatro del Soho CaixaBank, showcasing the venue and its cultural offerings. From production to post-production.',
-      youtubeId: '70YZe1VjCc8'
-    },
-    'ivoox': {
-      type: 'video',
-      title: 'IVOOX',
-      description: 'Production and post-production of a compelling advertisement for iVoox, the podcast platform.',
-      content: '/projects/Ivoox - spot publicitario.mp4'
-    },
-    'nike-video': {
-      type: 'video',
-      title: 'NIKE VIDEO',
-      description: 'A Nike advertisement featuring dynamic animations created in After Effects.',
-      content: '/projects/nike-spot.mp4'
-    },
-    'casino-royale': {
-      type: 'video',
-      title: 'CASINO ROYALE',
-      description: 'Production and post-production of an animation practice video in After Effects.',
-      content: '/projects/CASINO ROYALE.mp4'
-    },
-    'inside-the-mind': {
-      type: 'video',
-      title: 'INSIDE THE MIND',
-      description: 'A brief 3D animation showcasing 3D modeling and animation skills.',
-      content: '/projects/INSIDE-THE-MIND.mp4'
-    },
-    'energy': {
-      type: 'image',
-      title: 'ENERGY',
-      description: 'A graphic design project for an energy drink brand, encompassing branding and packaging design.',
-      content: '/projects/LATA.JPG'
-    },
-    'nike-landing': {
-      type: 'image',
-      title: 'NIKE LANDING',
-      description: 'Poster design for a landing page featuring sneaker sales, with a focus on design aesthetics and visual appeal.',
-      content: '/images/nike2.jpg'
-    }
-  };
+  const projectData = modalData;
+  const strings = modalStrings;
 
   // Function to create modal content based on project type
-  function createModalContent(project: string): string {
-    const data = projectData[project as keyof typeof projectData];
+  function createModalContent(project) {
+    const data = projectData[project];
     if (!data) return '';
 
     let content = `<p class="modal-description">${data.description}</p>`;
@@ -249,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="video-container">
               <video controls preload="none" poster="${data.content.replace('.mp4', '.jpg')}">
                 <source src="${data.content}" type="video/mp4">
-                Your browser does not support the video tag.
+                ${strings.browserNotSupported}
               </video>
             </div>
           `;
@@ -271,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
           content += `
             <div class="link-container">
               <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="project-link">
-                <span>Visit Project</span>
+                <span>${strings.visitProject}</span>
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
                   <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
@@ -317,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                   </svg>
-                  Download Game
+                  ${strings.downloadGame}
                 </a>
               </div>
             </div>
@@ -330,13 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Add click handlers to project cards
-  projectCards.forEach(card => {
+  projectCards.forEach((card) => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const projectId = card.dataset.project;
       if (!projectId) return;
       
-      const data = projectData[projectId as keyof typeof projectData];
+      const data = projectData[projectId];
       
       if (data) {
         modalTitle.textContent = data.title;
@@ -348,10 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add keyboard support
-    card.addEventListener('keydown', (e: KeyboardEvent) => {
+    card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        (card as HTMLElement).click();
+        card.click();
       }
     });
   });
@@ -365,8 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = ''; // Restore scrolling
     
     // Stop any playing videos
-    const videos = modalContentContainer.querySelectorAll('video') as NodeListOf<HTMLVideoElement>;
-    videos.forEach(video => {
+    const videos = modalContentContainer.querySelectorAll('video');
+    videos.forEach((video) => {
       video.pause();
       video.currentTime = 0;
     });
@@ -375,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.addEventListener('click', closeModal);
 
   // Close on escape key
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('show')) {
       closeModal();
     }

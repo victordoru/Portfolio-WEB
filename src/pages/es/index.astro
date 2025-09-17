@@ -1,0 +1,26 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+
+import Section4 from '../../components/Section4.astro';
+import Section1 from '../../components/Section1.astro';
+import Section3 from '../../components/Section3.astro';
+import Section2 from '../../components/Section2.astro';
+
+import { translations, type Lang } from '../../i18n/translations';
+
+const lang: Lang = 'es';
+const copy = translations[lang];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={copy.site.title} description={copy.site.description} lang={lang} />
+  </head>
+  <body>
+    <Section1 lang={lang} />
+    <Section2 lang={lang} />
+    <Section3 lang={lang} />
+    <Section4 lang={lang} />
+  </body>
+</html>
