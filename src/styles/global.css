@@ -119,7 +119,7 @@ body {
   .tit svg {
     -webkit-box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
     box-shadow: 5px 5px 10px #1a1a1a74, -5px -5px 10px #24242483;
-    transform: translateY(-10px);
+    /* transform: translateY(-10px); */
 
     /* align-self: flex-start; */
   }
@@ -143,7 +143,7 @@ body {
   .tit svg {
     -webkit-box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
     box-shadow: 5px 5px 10px #1a1a1a74, -5px -5px 10px #24242483;
-    transform: translateY(-0px);
+   /*  transform: translateY(-0px); */
 
     /* align-self: flex-start; */
   }
