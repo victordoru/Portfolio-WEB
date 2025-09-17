@@ -1,0 +1,24 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd /var/www/html/portfolio-victor
+          git pull origin main
+          sudo -u www-data npm install
+          sudo -u www-data npm run build
+          sudo chown -R www-data:www-data dist/
+          echo "✅ Deploy completado!"

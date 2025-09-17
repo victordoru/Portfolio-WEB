@@ -65,7 +65,7 @@ const site = translations[lang].site;
         {t.downloadCv}
       </a>
       <a
-	  style="height: 42px;"
+        id="linkedin-button"
         class="linkedin-link"
         href="https://www.linkedin.com/in/víctor-domínguez-ruiz-820870222"
         target="_blank"
@@ -102,6 +102,22 @@ const site = translations[lang].site;
 			z-index: 10;
 			transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 		}
+		
+		@media (max-width: 768px) {
+			.language-switch {
+				top: 20px;
+				left: 20px;
+				padding: 6px 12px;
+				font-size: 0.8rem;
+				gap: 6px;
+			}
+			.language-switch span {
+				font-size: 0.75rem;
+			}
+			.language-switch a {
+				font-size: 0.85rem;
+			}
+		}
 		.language-switch:hover {
 			transform: translateY(-2px);
 			box-shadow: 0 8px 20px rgba(8, 203, 213, 0.2);
@@ -131,6 +147,14 @@ const site = translations[lang].site;
 			gap: 14px;
 			z-index: 10;
 		}
+		
+		@media (max-width: 768px) {
+			.top-contact {
+				top: 20px;
+				right: 20px;
+				gap: 8px;
+			}
+		}
 			#contact-btn {
 				position: relative;
 				display: inline-flex;
@@ -148,6 +172,14 @@ const site = translations[lang].site;
 				transition: transform 0.3s ease, box-shadow 0.3s ease;
 				text-shadow: none;
 				overflow: hidden;
+			}
+			
+			@media (max-width: 768px) {
+				#contact-btn {
+					padding: 6px 16px;
+					font-size: 0.9rem;
+					letter-spacing: 0.05em;
+				}
 			}
 			#contact-btn::after {
 				content: "";
@@ -186,6 +218,13 @@ const site = translations[lang].site;
 				background: rgba(8, 203, 213, 0.1);
 				transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 			}
+			
+			@media (max-width: 768px) {
+				.top-contact-link {
+					width: 32px;
+					height: 32px;
+				}
+			}
 			.top-contact-link.whatsapp {
 				background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
 				border: none;
@@ -213,6 +252,13 @@ const site = translations[lang].site;
 				align-items: center;
 				gap: 18px;
 			}
+			
+			@media (max-width: 768px) {
+				.social-buttons {
+					gap: 12px;
+					margin-top: -10px;
+				}
+			}
 			#download-cv {
 				font-weight: 700;
 				font-size: 1.15rem;
@@ -222,6 +268,13 @@ const site = translations[lang].site;
 				letter-spacing: 0.04em;
 				text-shadow: none;
 			}
+			
+			@media (max-width: 768px) {
+				#download-cv {
+					font-size: 1rem;
+					letter-spacing: 0.02em;
+				}
+			}
 			#download-cv:hover {
 				text-decoration: underline;
 			}
@@ -229,6 +282,22 @@ const site = translations[lang].site;
 				display: inline-flex;
 				transition: transform 0.3s ease, box-shadow 0.3s ease;
 				border-radius: 5px;
+			}
+			
+			#linkedin-button {
+				height: 42px;
+			}
+			
+			@media (max-width: 768px) {
+				#linkedin-button {
+					height: 36px;
+				}
+			}
+			
+			@media (max-width: 480px) {
+				#linkedin-button {
+					height: 32px;
+				}
 			}
 			.linkedin-link:hover {
 				transform: translateY(-2px);
@@ -238,6 +307,13 @@ const site = translations[lang].site;
 				width: 48px;
 				height: 48px;
 				display: block;
+			}
+			
+			@media (max-width: 768px) {
+				.linkedin-link svg {
+					width: 36px;
+					height: 36px;
+				}
 			}
 			.scroll-down {
 				position: absolute;
@@ -284,6 +360,77 @@ const site = translations[lang].site;
 				100% {
 					opacity: 0;
 					transform: translateY(12px) rotate(-45deg);
+				}
+			}
+			
+			/* Mobile responsive styles for main content */
+			@media (max-width: 768px) {
+				.section1 {
+					padding: 0 20px;
+				}
+				
+				.tit {
+					text-align: center;
+					padding: 0 10px;
+				}
+				
+				.tit h3 {
+					font-size: 1rem;
+				}
+				
+				.tit h1 {
+					font-size: 2.5rem;
+					line-height: 1.2;
+				}
+				
+				.scroll-down {
+					bottom: 20px;
+					width: 32px;
+					height: 52px;
+					border-radius: 16px;
+				}
+				
+				.scroll-down span {
+					width: 10px;
+					height: 10px;
+				}
+			}
+			
+			@media (max-width: 480px) {
+				.tit h1 {
+					font-size: 2rem;
+				}
+				
+				.tit h3 {
+					font-size: 0.9rem;
+				}
+				
+				.language-switch {
+					top: 15px;
+					left: 15px;
+					padding: 5px 10px;
+					font-size: 0.75rem;
+				}
+				
+				.top-contact {
+					top: 15px;
+					right: 15px;
+					gap: 6px;
+				}
+				
+				#contact-btn {
+					padding: 5px 12px;
+					font-size: 0.8rem;
+				}
+				
+				.top-contact-link {
+					width: 28px;
+					height: 28px;
+				}
+				
+				.linkedin-link svg {
+					width: 32px;
+					height: 32px;
 				}
 			}
 		</style>
